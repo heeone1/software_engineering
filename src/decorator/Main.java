@@ -20,8 +20,8 @@ class SimpleCoffee implements Coffee {
 }
 
 // Base Decorator
-abstract class CoffeeDecorator implements Coffee {
-    protected Coffee decoratedCoffee;
+abstract class CoffeeDecorator implements Coffee { //모든 장식자의 부모 클래스
+    protected Coffee decoratedCoffee; //장식 대상
 
     public CoffeeDecorator(Coffee coffee) {
         this.decoratedCoffee = coffee;
@@ -75,13 +75,16 @@ class SugarDecorator extends CoffeeDecorator {
 // Client code
 public class Main {
     public static void main(String[] args) {
-        Coffee coffee = new SimpleCoffee();
+        Coffee coffee = new SimpleCoffee(); //가운데 심
         System.out.println(coffee.getDescription() + " $" + coffee.getCost());
 
-        coffee = new MilkDecorator(coffee);
-        System.out.println(coffee.getDescription() + " $" + coffee.getCost());
+        coffee = new MilkDecorator(coffee); //우유로 장식
+        System.out.println(coffee.getDescription() + " $" + coffee.getCost()); //우유 가격이 추가
 
-        coffee = new SugarDecorator(coffee);
-        System.out.println(coffee.getDescription() + " $" + coffee.getCost());
+        coffee = new SugarDecorator(coffee);//설탕으로 장식
+        System.out.println(coffee.getDescription() + " $" + coffee.getCost()); //설탕 가격이 추가
+    
+        coffee = new SugarDecorator(new MilkDecorator(new SugarDecorator(new SimpleCoffee())));
+        System.out.println(coffee.getDescription() + " $" + coffee.getCost()); 
     }
 }

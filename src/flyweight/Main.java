@@ -39,12 +39,12 @@ class Circle implements Shape {
 
 // Flyweight Factory
 class ShapeFactory {
-    private static final Map<String, Shape> circleMap = new HashMap<>();
+    private static final Map<String, Shape> circleMap = new HashMap<>(); //키-값 쌍으로 저장
 
     public static Shape getCircle(String color) {
-        Circle circle = (Circle) circleMap.get(color);
+        Circle circle = (Circle) circleMap.get(color); //이미 이 색깔로 생성된 Circle 객체가인지 확인
 
-        if (circle == null) {
+        if (circle == null) { //생성된 객체가 없가면 새로 생성
             circle = new Circle(color);
             circleMap.put(color, circle);
             System.out.println("Creating circle of color: " + color);
@@ -59,6 +59,9 @@ public class Main {
 
     public static void main(String[] args) {
         for (int i = 0; i < 20; i++) {
+
+            //Circle 객체를 직접 생성하지 않고, FLyweight Factory 을 통해서 함 
+            //직접 생성을 했다면, 동일한 색깔 정보는 계속 반복되어 생성됨 
             Circle circle = (Circle) ShapeFactory.getCircle(getRandomColor());
             circle.setX(getRandomX());
             circle.setY(getRandomY());

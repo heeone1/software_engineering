@@ -67,7 +67,8 @@ class ComputerFacade {
 public class Main {
     public static void main(String[] args) {
         ComputerFacade computer = new ComputerFacade();
-        computer.startComputer();
+
+        computer.startComputer(); //startComputer()만 호출하면 4가지 동작 한번에 실행시켜줌
         computer.stopComputer();
     }
 }
